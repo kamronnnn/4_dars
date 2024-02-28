@@ -1,0 +1,80 @@
+-- SELECT DISTINCT country FROM customers;
+
+-- SELECT country, count(customer_id) from customers
+-- GROUP BY country;
+
+
+-- SELECT country, count(customer_id) from customers
+-- GROUP BY country
+-- HAVING count(customer_id) > 4
+-- ORDER BY count(customer_id);
+
+
+-- --------------------------------------------------------
+
+-- drop table if exists students;
+-- drop table if exists courses;
+
+-- create table if not exists courses(
+-- 	course_id integer generated always as identity primary key,
+-- 	course_name varchar(20)
+-- );
+
+-- create table if not exists students(
+-- 	student_id integer generated always as identity primary key,
+-- 	first_name varchar(20),
+-- 	last_name varchar(20),
+-- 	course_id integer references courses(course_id)
+-- );
+
+
+-- insert into courses(course_name) values('Python'), ('C#'), ('Java');
+
+-- insert into students(first_name, last_name, course_id) values
+-- ('Toxir', 'Toxirov', 1),
+-- ('Sobir', 'Toxirov', 3),
+-- ('Jalil', 'Sobirov', 2),
+-- ('Bakir', 'Jalilov', 1);
+
+-- select * from courses;
+
+-- select * from students;
+
+-- delete from courses where course_id = 1;
+
+
+-- ------------------------------------------------------------------------------------
+-- foreign key, on delete, cascade
+
+
+drop table if exists students;
+drop table if exists courses;
+
+create table if not exists courses(
+	course_id integer generated always as identity primary key,
+	course_name varchar(20)
+);
+
+create table if not exists students(
+	student_id integer generated always as identity primary key,
+	first_name varchar(20),
+	last_name varchar(20),
+	course_id integer default 2,
+	foreign key (course_id) references courses(course_id) on delete set default
+);
+
+
+insert into courses(course_name) values('Python'), ('C#'), ('Java');
+
+insert into students(first_name, last_name, course_id) values
+('Toxir', 'Toxirov', 1),
+('Sobir', 'Toxirov', 3),
+('Jalil', 'Sobirov', 2),
+('Bakir', 'Jalilov', 1);
+
+select * from courses;
+
+select * from students order by student_id;
+
+delete from courses where course_id = 1;
+
